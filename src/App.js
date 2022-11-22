@@ -1,9 +1,9 @@
 import './App.css';
-import Contact from "./components/templates/Contact";
+import Home from "./components/templates/Home";
 
 function App() {
   return (
-      <Contact/>
+      <Home/>
   );
 }
 
