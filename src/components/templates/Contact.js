@@ -11,14 +11,13 @@ function Contact(){
     const [severity, setSeverity] = useState("success");
 
     const handleSubmit = (event) => {
-        console.log("ah ouai")
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         const emailRegex = /^[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)*$/
 
         if(data.get('Nom') === "" || data.get('Prenom') === "" || data.get('email') === "" || data.get('message') === ''){
             setOpen(true);
-            setMessage("Veuillez entrer une adresse email valide");
+            setMessage("Veuillez entrer entrer des données valide");
             setSeverity("error");
         }else if(!data.get('email').match(emailRegex)){
             setOpen(true);
@@ -26,6 +25,9 @@ function Contact(){
             setSeverity("error");
         }else{
             //TODO call api send and scnackbar ok.
+            setOpen(true);
+            setMessage("Votre demande a bien été envoyé");
+            setSeverity("success");
 
         }
 
@@ -55,8 +57,6 @@ function Contact(){
                         <input type={"submit"} className={"input-validation"} value={'Envoyer'}/>
                     </Box>
                     <ErrorSnackbar open={open} message={message} severity={severity}/>
-
-
                 </div>
             </div>
         </div>
