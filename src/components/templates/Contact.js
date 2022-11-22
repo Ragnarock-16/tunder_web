@@ -2,7 +2,7 @@ import ButtonAppBar from "../organism/Navbar";
 import Box from "@mui/material/Box";
 import {TextField} from "@mui/material";
 import InputTextField from "../molecule/inputTextField";
-import errorSnackbar from "../molecule/errorSnackbar";
+import ErrorSnackbar from "../molecule/ErrorSnackbar";
 import {useState} from "react";
 
 function Contact(){
@@ -11,6 +11,7 @@ function Contact(){
     const [severity, setSeverity] = useState("success");
 
     const handleSubmit = (event) => {
+        console.log("ah ouai")
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         const emailRegex = /^[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)*$/
@@ -53,7 +54,7 @@ function Contact(){
                         />
                         <input type={"submit"} className={"input-validation"} value={'Envoyer'}/>
                     </Box>
-                    <errorSnackbar open={open} message={message} severity={severity}/>
+                    <ErrorSnackbar open={open} message={message} severity={severity}/>
 
 
                 </div>

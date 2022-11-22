@@ -1,6 +1,6 @@
 import {Alert, Snackbar} from "@mui/material";
 
-export default function errorSnackbar({open,message,severity}){
+export default function ErrorSnackbar({open,message,severity}){
     return <Snackbar
         open={open}
         autoHideDuration={4000}
