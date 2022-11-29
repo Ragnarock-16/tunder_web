@@ -1,14 +1,29 @@
+import config from '../config.json'
 
 class API{
-  API_URL = "http://127.0.0.1:5000/api"
+  API_URL = config.ApiUrl
 
-  get url(){
-      return this.API_URL;
+  signIn(email, password){
+      return fetch(`${this.API_URL}/Auth/token`,
+          {method: 'POST',
+              body: JSON.stringify({username: '', email: email, password: password}),
+              headers: {'Content-Type': 'application/json'}}).then(response => response.status===200?response.json():response)
   }
 
-  loadCours(bloc){
-      return fetch('${this.base}/Cours/${bloc}').then(resp =>resp.json)
-  }
+  oauthSignIn(token) {
+      return fetch(`${this.API_URL}/Auth/signin-google`,
+          {
+              method: 'POST',
+              body: JSON.stringify(token),
+              headers: {'Content-Type': 'application/json'}}).then(response => response.status===200?response.json():response)
+    }
 
-  
+    signUp(user) {
+      return fetch(`${this.API_URL}/Auth/signUp`,{
+            method: 'POST',
+            body: JSON.stringify(user),
+            headers: {'Content-Type': 'application/json'}}).then(response => response.status!==200?response.json():response.status)
+      }
+
 }
+export const api = new API();

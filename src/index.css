@@ -16,6 +16,35 @@ body {
   border-radius: 16px;
   background-color: #e3dcdc;}
 
+.main{
+  color: white;
+  background-color: rgba(19, 19, 19, 0.94);
+}
+.loginForm{
+  padding: 100px;
+  margin:8px 4px 8px 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+h1{
+  text-align: center;
+}
+input.submit{
+  background-color: #000000;
+  margin: 40px;
+  color: white;
+  width: 80%;
+  height: 40px;
+  border-radius: 8px;
+}
+hr{
+  color: #000000;
+  backgroundColor: #000000;
+  height: 2px;
+  width: 100%;
+}
 .input-validation{
   width: 50%;
   padding: 12px 20px;

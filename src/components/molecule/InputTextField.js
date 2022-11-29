@@ -1,17 +1,15 @@
 import {TextField} from "@mui/material";
 
-export default function InputTextField({id, label, value}){
+export default function InputTextField({type, label, id}){
     return <TextField
         sx={{margin: '1%'}}
         required
         disabled={false}
-        variant={"standard"}
         margin={'normal'}
-        type={id}
-        value={value}
+        fullWidth
+        type={type}
         id={id}
         label={label}
         name={id}
-        autoComplete={id}
-$    />
+  />
 }

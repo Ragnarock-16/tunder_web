@@ -1,9 +1,13 @@
 import './App.css';
-import Home from "./components/templates/Home";
-
+import {ObserverHome} from "./components/pages/Home";
+import Contact from "./components/pages/Contact";
+import {Routes, Route} from "react-router-dom";
 function App() {
   return (
-      <Home/>
+      <Routes>
+          <Route path="/" element={<ObserverHome/>}/>
+          <Route path="/contact" element={<Contact/>}/>
+      </Routes>
   );
 }
 

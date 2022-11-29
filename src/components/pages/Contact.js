@@ -1,8 +1,8 @@
 import ButtonAppBar from "../organism/Navbar";
 import Box from "@mui/material/Box";
-import {TextField} from "@mui/material";
-import InputTextField from "../molecule/inputTextField";
-import ErrorSnackbar from "../molecule/ErrorSnackbar";
+import InputTextField from "../molecule/InputTextField";
+import InputMessageFiled from "../molecule/InputMessageField";
+import {ObservedMessageDisplayer} from "../molecule/MessageDisplayer";
 import {useState} from "react";
 
 function Contact(){
@@ -36,6 +36,7 @@ function Contact(){
     return(
         <div>
             <ButtonAppBar/>
+
             <div className={"contact"}>
                 <div className={"contact-from-title"}>
                     <h1>Contact</h1>
@@ -45,18 +46,10 @@ function Contact(){
                         <InputTextField id={'Nom'} label={'Nom'} value={undefined} />
                         <InputTextField id={'Prenom'} label={'Prenom'} value={undefined}/>
                         <InputTextField id={'email'} label={'Email'} value={undefined}/>
-                        <TextField
-                            id="message"
-                            name={"message"}
-                            label="Message"
-                            multiline
-                            rows={4}
-                            variant="filled"
-                            sx={{width: '60%', margin: '2%'}}
-                        />
+                        <InputMessageFiled id={'message'} label={'Message'} value={undefined}/>
                         <input type={"submit"} className={"input-validation"} value={'Envoyer'}/>
                     </Box>
-                    <ErrorSnackbar open={open} message={message} severity={severity}/>
+                    <ObservedMessageDisplayer open={open} message={message} severity={severity}/>
                 </div>
             </div>
         </div>
