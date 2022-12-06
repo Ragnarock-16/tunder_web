@@ -5,7 +5,6 @@ import Paper from '@mui/material/Paper';
 import Avatar from '@mui/material/Avatar';
 import DocumentScannerIcon from '@mui/icons-material/DocumentScanner';
 import EmojiPeopleIcon from '@mui/icons-material/EmojiPeople';
-
 import {green} from "@mui/material/colors";
 import {ObserverLogin} from "../templates/Login";
 import {ObservedMessageDisplayer} from "../molecule/MessageDisplayer";
@@ -13,8 +12,17 @@ import {toasterStore} from "../../stores/ToasterStore";
 import {observer} from "mobx-react";
 import {ObserverSignUp} from "../templates/SignUp";
 import {authentificationStore} from "../../stores/AuthentificationStore";
+import { useNavigate } from "react-router-dom";
+import {useEffect} from "react";
 function Home(){
 
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (authentificationStore.isAuthenticated()) {
+            navigate("/horaire")
+        }
+    },[authentificationStore.isLogIn])
     return(
         <div>
             <ButtonAppBar/>
@@ -44,7 +52,7 @@ function Home(){
                     </div>
                 </Grid>
                 <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square sx={{width: '100%',}}>
-                    {authentificationStore._isLogIn?  <ObserverLogin/> : <ObserverSignUp/> }
+                    {authentificationStore.signUpMode?  <ObserverSignUp/> : <ObserverLogin/>  }
                     <ObservedMessageDisplayer message={toasterStore.message} open={toasterStore.open} severity={toasterStore.severity}/>
                 </Grid>
             </Grid>

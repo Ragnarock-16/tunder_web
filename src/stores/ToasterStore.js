@@ -37,6 +37,7 @@ class ToasterStore{
         this.open = true
         this._message = message
         this.severity = 'success'
+        this._setTimer()
     }
 
     _setTimer(){

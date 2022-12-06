@@ -6,19 +6,31 @@ import {userStore} from "./UserStore";
 
 class AuthentificationStore{
 
-    _isLogIn = true
+    _isLogIn = false
+    _SignUpMode = false
 
     constructor() {
         makeAutoObservable(this);
     }
-
+    get signUpMode(){
+        return this._SignUpMode
+    }
+    set signUpMode(value){
+        this._SignUpMode = value
+    }
     get isLogIn(){
         return this._isLogIn
     }
     set isLogIn(value){
         this._isLogIn = value
     }
-
+    isAuthenticated() {
+        var token = localStorage.getItem('token')
+        if(token == null || jwt_decode(token).exp < Date.now() / 1000){
+            return false
+        }
+        return true
+    }
     /**
      * Permet de se connecter avec un compte Google
      * @param response token reponse de google
@@ -31,7 +43,8 @@ class AuthentificationStore{
                 this.handleSignUpProvider(response)
             } else{
                 console.log("connexion avec google réussie")
-                userStore.utilisateur = data
+                this.isLogIn= true
+                userStore.saveUser(data)
             }
         })
     }
@@ -59,10 +72,10 @@ class AuthentificationStore{
                 toasterStore.displayErrorMessage("Credential invalide ou compte inexistant")
             }else{
                 console.log("Connexion réussie")
-                userStore.utilisateur = data
+                this.isLogIn= true
+                userStore.saveUser(data)
             }
         })
-
     }
 
     /**

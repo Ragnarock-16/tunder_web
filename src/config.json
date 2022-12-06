@@ -1,4 +1,4 @@
 {
   "GoogleClientId": "472819770661-u68pn3pvntdggllv6v2kspoh1p190bva.apps.googleusercontent.com",
-  "ApiUrl": "http://localhost:5244/api"
+  "ApiUrl": "https://localhost:5244/api"
 }

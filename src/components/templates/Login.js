@@ -6,7 +6,9 @@ import {observer} from "mobx-react";
 
 
 function Login(){
-
+    const createAccount = () => {
+        authentificationStore.signUpMode=true;
+    }
     const submit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -15,6 +17,7 @@ function Login(){
 
     return <div className={"loginForm"}>
         <LoginForm label={"Connexion"} handleSubmit={submit}/>
+        <p className={"create"} onClick={createAccount}>Créer un compte</p>
         <hr/>
         <GoogleAuth clientId={config.GoogleClientId} callbackResponse={authentificationStore.handleCallbackResponse}/>
   </div>

@@ -4,9 +4,9 @@ export default class Utilisateur{
     _token;
 
     constructor(username, email, token) {
-        this._username = username;
-        this._email = email;
-        this._token = token;
+        this.username = username;
+        this.email = email;
+        this.token = token;
     }
 
     set username(value) {

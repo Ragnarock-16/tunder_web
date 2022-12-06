@@ -15,7 +15,20 @@ body {
   flex-flow: column;
   border-radius: 16px;
   background-color: #e3dcdc;}
-
+.horaireForm{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+}
+p.create{
+  color: blue;
+  text-decoration: underline;
+}
+p.create:hover{
+  color: blue;
+  cursor: pointer;
+}
 .main{
   color: white;
   background-color: rgba(19, 19, 19, 0.94);
@@ -56,6 +69,123 @@ hr{
   background-color: #464242;
   border-radius: 10px;
 
+}
+.chat{
+  background-color: #ffffff;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.container-chat{
+  border:1px solid black;
+  border-radius: 10px;
+  width: 65%;
+  height: 80%;
+  display: flex;
+  overflow: hidden;
+}
+.sidebar{
+  width: 30%;
+  height: 100%;
+  background-color: rgba(19, 19, 19, 0.94);
+}
+.chatTitle{
+  display: flex;
+  align-items: center;
+  color: white;
+  background-color: #464242;
+  height: 50px;
+  padding:10px;
+  margin: 0;
+}
+.coursChatCard{
+  display: flex;
+  padding: 30px;
+  align-items: center;
+  border: 1px solid #464242;
+  overflow: hidden;
+  text-align: center;
+  color: white;
+  cursor: pointer;
+}
+.coursChatCard:hover{
+  background-color: rgba(126, 123, 123, 0.71);
+}
+.messages{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    color: white;
+    text-align: center;
+}
+.messageHeader{
+    display: flex;
+    flex-direction: column;
+    color: gray;
+}
+.messageInfo{
+  background-color: rgba(47, 47, 47, 0.71);
+  height: 50px;
+  width: 100%;
+  padding:10px 0 10px 0;
+
+}
+.messageList{
+  background-color: black;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  height: 100%;
+  width: 100%;
+  overflow: scroll;
+}
+.messageContent{
+  display: flex;
+  gap: 10px;
+}
+.owner{
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+.messageContent.owner p{
+  background-color: #a8a8ef;
+  color: black;
+  border-radius: 10px 0 10px 10px;
+  padding: 10px 20px;
+}
+.messageContent p{
+  background-color: white;
+  color: black;
+  border-radius: 0 10px 10px;
+  padding: 10px 20px;
+}
+.messageInput{
+  height: 50px;
+  width: 100%;
+  padding:10px 0 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.messageInput input{
+  width: 100%;
+  height: 30px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  font-size: 18px;
+}
+.messageInput input::placeholder{
+  color: #b4b3b3;
+}
+.sendButton button{
+  border: none;
+  padding: 10px 15px;
+  color: white;
+  background-color: #5d5858;
 }
 .input-validation:active {
   box-shadow: 2px 2px 5px #100f0f;
