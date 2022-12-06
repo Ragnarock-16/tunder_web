@@ -1,9 +1,9 @@
 import './App.css';
-import Contact from "./components/templates/Contact";
+import TutoratRequest from "./components/templates/TutoratRequest";
 
 function App() {
   return (
-      <Contact/>
+      <TutoratRequest/>
   );
 }
 
