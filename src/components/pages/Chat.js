@@ -1,5 +1,5 @@
-import SideBarChat, {ObserverSideBarChat} from "../molecule/SideBarChat";
-import Messages from "../molecule/Messages";
+import  {ObserverSideBarChat} from "../organism/SideBarChat";
+import  {ObserverMessages} from "../organism/Messages";
 import ButtonAppBar from "../organism/Navbar";
 
 export default function Chat(){
@@ -9,8 +9,7 @@ export default function Chat(){
             <div className={'chat'}>
                 <div className={'container-chat'}>
                     <ObserverSideBarChat/>
-                    <Messages/>
-
+                    <ObserverMessages/>
                 </div>
             </div>
         </div>

@@ -1,8 +1,8 @@
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -15,6 +15,10 @@ body {
   flex-flow: column;
   border-radius: 16px;
   background-color: #e3dcdc;}
+.contactInput{
+  width: 98%;
+  align-items: center;
+}
 .horaireForm{
   display: flex;
   flex-direction: column;
@@ -72,7 +76,7 @@ hr{
 }
 .chat{
   background-color: #ffffff;
-  height: 100vh;
+  height: 90vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -80,7 +84,7 @@ hr{
 .container-chat{
   border:1px solid black;
   border-radius: 10px;
-  width: 65%;
+  width: 95%;
   height: 80%;
   display: flex;
   overflow: hidden;
@@ -89,6 +93,8 @@ hr{
   width: 30%;
   height: 100%;
   background-color: rgba(19, 19, 19, 0.94);
+  postion:sticky;
+  overflow: hidden;
 }
 .chatTitle{
   display: flex;
@@ -99,6 +105,12 @@ hr{
   padding:10px;
   margin: 0;
 }
+.chatList{
+  height: 100%;
+  width: 100%;
+  overflow: scroll;
+}
+
 .coursChatCard{
   display: flex;
   padding: 30px;
@@ -113,18 +125,18 @@ hr{
   background-color: rgba(126, 123, 123, 0.71);
 }
 .messages{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    color: white;
-    text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  color: white;
+  text-align: center;
 }
 .messageHeader{
-    display: flex;
-    flex-direction: column;
-    color: gray;
+  display: flex;
+  flex-direction: column;
+  color: gray;
 }
 .messageInfo{
   background-color: rgba(47, 47, 47, 0.71);
@@ -140,15 +152,17 @@ hr{
   height: 100%;
   width: 100%;
   overflow: scroll;
+  overscroll-behavior:revert;
 }
+
 .messageContent{
   display: flex;
   gap: 10px;
 }
 .owner{
-    display: flex;
-    gap: 10px;
-    justify-content: flex-end;
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
 }
 .messageContent.owner p{
   background-color: #a8a8ef;
@@ -187,10 +201,65 @@ hr{
   color: white;
   background-color: #5d5858;
 }
+.adminPanel{
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+.cardContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    color: white;
+    text-align: center;
+    padding: 10px;
+}
+.cardContent{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+}
+.usrCard{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60%;
+    height: 100%;
+    text-align: center;
+    padding: 50px;
+    background-color: black;
+}
+.cardPanel{
+    padding: 10px;
+}
+.cardButton.Delete {
+  background-color: red;
+}
+.cardButton.Done{
+  background-color: green;
+}
+addUser{
+  background-color: black;
+  color: white;
+}
+.cardButton{
+    background-color: #06152c;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    margin: 10px;
+}
+.cardButton:hover {
+  background-color: #5d5858;
+}
 .input-validation:active {
   box-shadow: 2px 2px 5px #100f0f;
 }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  monospace;
 }

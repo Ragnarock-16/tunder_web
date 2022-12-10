@@ -19,6 +19,7 @@ function Home(){
     const navigate = useNavigate();
 
     useEffect(() => {
+
         if (authentificationStore.isAuthenticated()) {
             navigate("/horaire")
         }

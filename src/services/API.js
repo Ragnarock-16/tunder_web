@@ -51,5 +51,50 @@ class API {
             headers: {'Content-Type': 'application/json'}
         }).then(response => response.status === 200 ? response.json() : response)
     }
+
+    getUsers(token){
+        return fetch(`${this.API_URL}/Auth/Users`, {
+            method: 'GET',
+            headers: {'Authorization': `bearer ${token}`}
+        }).then(response => response.status === 200 ? response.json() : response)
+    }
+
+    blockUser(token, user){
+        return fetch(`${this.API_URL}/Auth/Status/` +encodeURIComponent(user.email), {
+            method: 'PUT',
+            headers: {'Authorization': `bearer ${token}`}
+        }).then(response => response.status)
+    }
+    getUserStatus(token, user){
+        return fetch(`${this.API_URL}/Auth/Status/` +encodeURIComponent(user.email), {
+            method: 'GET',
+            headers: {'Authorization': `bearer ${token}`}
+        }).then(response => response.status===200 ? response.text() : response)
+    }
+    updateUser(token, user, emailUpdate, usernameUpdate){
+        return fetch(`${this.API_URL}/Auth/User/?email=` +
+            encodeURIComponent(user.email)+`&updateEmail=`+
+            encodeURIComponent(emailUpdate)+`&updateUsername=`+
+            encodeURIComponent(usernameUpdate),
+            {
+            method: 'PUT',
+            body: JSON.stringify({email: emailUpdate, username: usernameUpdate}),
+            headers: {'Authorization': `bearer ${token}`, 'Content-Type': 'application/json'}
+        }).then(response => response.status)
+    }
+    deleteUser(token, user){
+        return fetch(`${this.API_URL}/Auth/User/?email=` +encodeURIComponent(user.email), {
+            method: 'DELETE',
+            headers: {'Authorization': `bearer ${token}`}
+        }).then(response => response.status)
+    }
+    contact(email, message){
+        return fetch(`${this.API_URL}/Contact`, {
+            method: 'POST',
+            body: JSON.stringify({from: email,to:"" ,body: message}),
+            headers: {'Content-Type': 'application/json'}
+        }).then(response => response.status)
+    }
+
 }
 export const api = new API()

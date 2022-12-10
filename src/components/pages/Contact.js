@@ -3,35 +3,27 @@ import Box from "@mui/material/Box";
 import InputTextField from "../molecule/InputTextField";
 import InputMessageFiled from "../molecule/InputMessageField";
 import {ObservedMessageDisplayer} from "../molecule/MessageDisplayer";
-import {useState} from "react";
-import {userStore} from "../../stores/UserStore";
+import {api} from "../../services/API";
+import {toasterStore} from "../../stores/ToasterStore";
+import {observer} from "mobx-react";
 
 function Contact(){
-    const [open, setOpen] = useState(false);
-    const [message, setMessage] = useState("");
-    const [severity, setSeverity] = useState("success");
+
 
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         const emailRegex = /^[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)*$/
-
         if(data.get('Nom') === "" || data.get('Prenom') === "" || data.get('email') === "" || data.get('message') === ''){
-            setOpen(true);
-            setMessage("Veuillez entrer entrer des données valide");
-            setSeverity("error");
+            toasterStore.displayErrorMessage("Veuillez entrer entrer des données valide");
         }else if(!data.get('email').match(emailRegex)){
-            setOpen(true);
-            setMessage("Veuillez entrer une adresse email valide");
-            setSeverity("error");
+            toasterStore.displayErrorMessage("Veuillez entrer une adresse email valide");
         }else{
-            //TODO call api send and scnackbar ok.
-            setOpen(true);
-            setMessage("Votre demande a bien été envoyé");
-            setSeverity("success");
-
+            api.contact(data.get('email'),data.get('message')).
+            then(response => {response === 200 ?
+                toasterStore.displayConfirmMessage("Votre message a bien été envoyé")
+                : toasterStore.displayErrorMessage("Erreur lors de l'envoi du message");console.log(response)})
         }
-
     }
 
     return(
@@ -44,16 +36,22 @@ function Contact(){
                 </div>
                 <div>
                     <Box component='form' onSubmit={handleSubmit}>
-                        <InputTextField id={'Nom'} label={'Nom'} value={undefined} />
-                        <InputTextField id={'Prenom'} label={'Prenom'} value={undefined}/>
-                        <InputTextField id={'email'} label={'Email'} value={undefined}/>
+                        <div className={"contactInput"}>
+                            <InputTextField className={"contactInput"} id={'Nom'} label={'Nom'} value={undefined} />
+                        </div>
+                        <div className={"contactInput"}>
+                            <InputTextField className={"contactInput"} id={'Prenom'} label={'Prenom'} value={undefined}/>
+                        </div>
+                        <div className={"contactInput"}>
+                            <InputTextField className={"contactInput"} id={'email'} label={'Email'} value={undefined}/>
+                        </div>
                         <InputMessageFiled id={'message'} label={'Message'} value={undefined}/>
                         <input type={"submit"} className={"input-validation"} value={'Envoyer'}/>
                     </Box>
-                    <ObservedMessageDisplayer open={open} message={message} severity={severity}/>
+                    <ObservedMessageDisplayer message={toasterStore.message} open={toasterStore.open} severity={toasterStore.severity}/>
                 </div>
             </div>
         </div>
     )
 }
-export default Contact;
+export const ObserverContact = observer (Contact);

@@ -41,11 +41,14 @@ class AuthentificationStore{
         api.oauthSignIn(tokenRequest).then(data => {
             if(data.status===400){
                 this.handleSignUpProvider(response)
-            } else{
-                console.log("connexion avec google réussie")
+            } else if(data.status===401) {
+                localStorage.removeItem('token')
+                toasterStore.displayErrorMessage("Compte bloqué")
+            }else{
                 this.isLogIn= true
                 userStore.saveUser(data)
             }
+
         })
     }
 
