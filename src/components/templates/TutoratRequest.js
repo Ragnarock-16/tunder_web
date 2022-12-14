@@ -1,6 +1,7 @@
 import ButtonAppBar from "../organism/Navbar";
 import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 import {useState} from "react";
+import Button from "@mui/material/Button";
 
 export default function TutoratRequest(){
 
@@ -84,6 +85,7 @@ export default function TutoratRequest(){
                     }
                 </Select>
             </FormControl>
+            <Button variant="contained">Demander</Button>
         </div>
     )
 }
