@@ -1,12 +1,25 @@
 import {makeAutoObservable} from "mobx";
 import jwt_decode from "jwt-decode";
+import {api} from "../services/API";
 
 class UserStore{
-
+    _userCount = undefined
     constructor() {
         makeAutoObservable(this);
     }
-
+    set userCount(value) {
+        this._userCount = value;
+    }
+    get userCount() {
+        return this._userCount;
+    }
+    getUserCount(){
+        api.getUserCount().then(response => {
+            if(!response.status){
+                this.userCount = response
+            }
+        })
+    }
     saveUser(token) {
         if (token !== undefined) {
             localStorage.setItem('token', token.tokenString)

@@ -96,5 +96,52 @@ class API {
         }).then(response => response.status)
     }
 
+    async getSynthese(token){
+        return await fetch(`${this.API_URL}/Synthese`, {
+            method: 'GET',
+            headers: {'Authorization': `bearer ${token}`}
+        }).then(response => response.status === 200 ? response.json() : response)
+    }
+
+    getSyntheseCount(){
+        return fetch(`${this.API_URL}/Synthese/statistique`, {
+            method: 'GET',
+            headers: {'Content-Type': 'application/json'}
+        }).then(response => response.status === 200 ? response.json() : response)
+    }
+
+    getUserCount(){
+        return fetch(`${this.API_URL}/Auth/statistique`, {
+            method: 'GET',
+            headers: {'Content-Type': 'application/json'}
+        }).then(response => response.status === 200 ? response.json() : response)
+    }
+
+    async getDemande(token){
+        return await fetch(`${this.API_URL}/Tutorat`, {
+            method: 'GET',
+            headers: {'Authorization': `bearer ${token}`}
+        }).then(response => response.status === 200 ? response.json() : response)
+    }
+    async getCours(){
+        return await fetch(`${this.API_URL}/Cours/cours`, {
+            method: 'GET',
+            headers: {'Content-Type': 'application/json'}
+        }).then(response => response.status === 200 ? response.json() : response)
+    }
+    getTutors(token,bloc, cours){
+        return fetch(`${this.API_URL}/Cours/`+encodeURIComponent(bloc)+`/bloc/`+encodeURIComponent(cours), {
+            method: 'GET',
+            headers: {'Authorization': `bearer ${token}`}
+        }).then(response => response.status === 200 ? response.json() : response)
+    }
+    addDemande(token, demande){
+        console.log(JSON.stringify(demande))
+        return fetch(`${this.API_URL}/Tutorat`, {
+            method: 'POST',
+            body: JSON.stringify(demande),
+            headers: {'Authorization': `bearer ${token}`, 'Content-Type': 'application/json'}
+        }).then(response => response.status)
+    }
 }
 export const api = new API()

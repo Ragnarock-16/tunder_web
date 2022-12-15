@@ -259,6 +259,48 @@ addUser{
 .input-validation:active {
   box-shadow: 2px 2px 5px #100f0f;
 }
+.headerColumn{
+  background-color: #06152c;
+  color: white;
+}
+.synthese{
+  padding-left: 24px;
+  padding-right: 24px;
+
+}
+.syntheseGrid{
+  height: 400px;
+  width: 100%;
+  margin-top: 90px;
+}
+.demande{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  margin-top: 30px;
+}
+.demandeBtn{
+  display: flex;
+  justify-content: center;
+  flex-wrap: nowrap;
+  flex-direction: row;
+}
+.demandeBtn > *{
+  margin: 0px 10px;
+}
+.demandeComment{
+  display: flex;
+  justify-content: center;
+}
+.tabPanel{
+  width: 100%;
+  height: 100%;
+}
+.tabPanel *{
+  margin: 0;
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
   monospace;

@@ -1,6 +1,6 @@
 import {TextField} from "@mui/material";
 
-export default function inputMessageField({id,label}){
+export default function InputMessageField({id,label}){
     return <TextField
         id={id}
         name={"message"}
