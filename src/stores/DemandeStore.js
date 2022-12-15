@@ -75,7 +75,8 @@ class DemandeStore{
        let formattedData=[]
         data.forEach(cours => {
             formattedData.push({
-                label: cours.nom
+                label: cours.nom,
+                bloc : cours.bloc
             })
         })
         return formattedData
@@ -120,6 +121,22 @@ class DemandeStore{
             }else{
                 console.log(response)
                 toasterStore.displayErrorMessage("Erreur lors de la création de la demande")
+            }
+        })
+    }
+    beTutor(demande){
+        let data = []
+        demande.forEach(demande => {
+            data.push({
+                bloc: demande.bloc,
+                nom: demande.label,
+            })
+        })
+        api.becomeTutor(localStorage.getItem('token'),data).then(response => {
+            if(response===200){
+                toasterStore.displayConfirmMessage("Demande de tuteur créée avec succès")
+            }else{
+                toasterStore.displayErrorMessage("Erreur lors de la création de la demande de tuteur")
             }
         })
     }

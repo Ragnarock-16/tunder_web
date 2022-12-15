@@ -135,8 +135,17 @@ class API {
             headers: {'Authorization': `bearer ${token}`}
         }).then(response => response.status === 200 ? response.json() : response)
     }
+
+    becomeTutor(token, cours){
+
+        return fetch(`${this.API_URL}/Cours/Tuteur`, {
+            method: 'PUT',
+            body: JSON.stringify(cours),
+            headers: {'Authorization': `bearer ${token}`,'Content-Type': 'application/json'}
+        }).then(response => response.status)
+    }
+
     addDemande(token, demande){
-        console.log(JSON.stringify(demande))
         return fetch(`${this.API_URL}/Tutorat`, {
             method: 'POST',
             body: JSON.stringify(demande),
