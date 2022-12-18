@@ -4,11 +4,11 @@ import {observer} from "mobx-react";
 
 const AdminRoute = () => {
     const checkStatus = () => {
-        if (userStore.getUserRole() === "Admin" || userStore.getUserExp() < Date.now()/1000) {
-            return false
+        if (userStore.getUserRole() === "Admin" && userStore.getUserExp() > Date.now()/1000) {
+            return true
         }
-        return true
+        return false
     }
-    return(checkStatus()? <Outlet/> : <Navigate to="/"/>)
+    return(checkStatus()?<Outlet/>:<Navigate to="/"/> )
 }
 export const ObserverAdminRoute = observer(AdminRoute)

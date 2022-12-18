@@ -38,18 +38,18 @@ function Home(){
                         my: 8,
                         mx: 4,
                         display: 'flex',
-                        flexDirection: 'row',
+                        flexDirection: 'column',
                         width: '50%',
 
                     }}
                 >
-                    <div>
+                    <div className={"homePanel"}>
                         <Avatar sx={{ m: 4, bgcolor: green,height: 120, width:120 }}>
                             <DocumentScannerIcon sx={{ height: 100, width:100 }} />
                         </Avatar>
                         <p>Nous disposons de {syntheseStore.syntheseCount} synthèses ! </p>
                     </div>
-                    <div>
+                    <div className={"homePanel"}>
                         <Avatar sx={{ m: 4, bgcolor: 'primary.main',height: 120, width:120 }}>
                             <EmojiPeopleIcon sx={{ height: 100, width:100 }} />
                         </Avatar>

@@ -111,7 +111,7 @@ class DemandeStore{
             },
             rencontre: {
                 date: demande.get("dateTime")===""? "1970-01-01 01:00":demande.get("dateTime"),
-                addresse: demande.get("rue") + demande.get("num")
+                addresse: demande.get("rue") +" " +demande.get("num")
             }
         }
         api.addDemande(localStorage.getItem('token'),data).then(response => {
@@ -137,6 +137,31 @@ class DemandeStore{
                 toasterStore.displayConfirmMessage("Demande de tuteur créée avec succès")
             }else{
                 toasterStore.displayErrorMessage("Erreur lors de la création de la demande de tuteur")
+            }
+        })
+    }
+    updateDemande(demande,etat){
+        let data = {
+            id: demande.id,
+            commentaire: demande.Commentaire,
+            etat: etat,
+            gestionnaire: demande.Tuteur,
+            demandeur:demande.Demandeur,
+            cours: {
+                bloc: demande.Bloc,
+                nom: demande.Cours
+            },
+            rencontre: {
+                date: demande.Date,
+                addresse: demande.Lieu
+            }
+        }
+        api.updateDemande(localStorage.getItem('token'),data).then(response => {
+            if(response===200){
+                this.getDemandes()
+                toasterStore.displayConfirmMessage("Statut de la demande modifié avec succès")
+            }else{
+                toasterStore.displayErrorMessage("Erreur lors de l'acceptation de la demande")
             }
         })
     }

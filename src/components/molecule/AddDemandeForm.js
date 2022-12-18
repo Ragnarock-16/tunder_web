@@ -19,14 +19,33 @@ function AddDemandeForm({handleSubmit}) {
     const [selectedDate, setSelectedDate] = useState(null);
 
     const handleBlocChange = (event, newValue) => {
-        setSelectedBloc(newValue.label);
-        setSelectedCours(null);
-        setSelectedTuteur(null);
+        if(newValue !== null) {
+            setSelectedBloc(newValue.label);
+            setSelectedCours(null);
+            setSelectedTuteur(null);
+        }else{
+            setSelectedBloc(null);
+            setSelectedCours(null);
+            setSelectedTuteur(null);
+        }
+
     }
     const handleCoursChange = (event, newValue) => {
-        setSelectedCours(newValue.label);
-        setSelectedTuteur(null);
-        demandeStore.getTutors(selectedBloc,newValue.label)
+        if(newValue !== null) {
+            setSelectedCours(newValue.label);
+            setSelectedTuteur(null);
+            demandeStore.getTutors(selectedBloc, newValue.label)
+        }else{
+            setSelectedCours(null);
+            setSelectedTuteur(null);
+        }
+    }
+    const handleTutorChange = (event, newValue) => {
+        if(newValue !== null) {
+            setSelectedTuteur(newValue.label);
+        }else{
+            setSelectedTuteur(null);
+        }
     }
 
     return (<form onSubmit={handleSubmit}>
@@ -55,7 +74,7 @@ function AddDemandeForm({handleSubmit}) {
             options={demandeStore.getTutorGivenCours()}
             disabled={selectedCours === null}
             isOptionEqualToValue={(option, value) => option.label === value.label}
-            onChange={(event, newValue) => {setSelectedTuteur(newValue.label)}}
+            onChange={handleTutorChange}
             sx={{ width: 400 ,marginBottom:2}}
             renderInput={(params) => <TextField {...params} name={"tuteur"} label="Tuteur" />}
         />
@@ -79,7 +98,6 @@ function AddDemandeForm({handleSubmit}) {
             value={"Demander"}
         >
         </input>
-
     </form>)
 }
 export const ObserverAddDemandeForm = observer(AddDemandeForm);

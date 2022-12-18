@@ -10,10 +10,23 @@ import {userStore} from "../../stores/UserStore";
 
 export default function ButtonAppBar() {
 
-    const CheckAuth = () => {
-        if(authentificationStore.isAuthenticated()){
-            return <Button color="inherit" onClick={userStore.forgetUtilisateur} >Deconnexion</Button>
+    const authNav = () => {
+            return(<div>
+                <Button color="inherit" component={Link} to={"/"}>Accueil</Button>
+                {userStore.getUserRole()==="Admin"?<Button color="inherit" component={Link} to={"/adminPanel"}>Admin Panel</Button>:null}
+                <Button color={"inherit"} component={Link} to={"/chat"}>Chat</Button>
+                <Button color={"inherit"} component={Link} to={"/synthese"}>Synthese</Button>
+                <Button color={"inherit"} component={Link} to={"/demande"}>Demande</Button>
+                <Button color={"inherit"} component={Link} to={"/contact"}>Contact</Button>
+                <Button color="inherit" onClick={userStore.forgetUtilisateur} >Deconnexion</Button>
+            </div>)
         }
+        
+    const visitNav=()=> {
+        return (<div>
+            <Button color="inherit" component={Link} to={"/"}>Accueil</Button>
+            <Button color={"inherit"} component={Link} to={"/contact"}>Contact</Button>
+        </div>)
     }
 
     return (
@@ -23,9 +36,8 @@ export default function ButtonAppBar() {
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                         TUnder
                     </Typography>
-                    <Button color="inherit" component={Link} to={"/"}>Accueil</Button>
-                    <Button color={"inherit"} component={Link} to={"/contact"}>Contact</Button>
-                    {CheckAuth()}
+                    {authentificationStore.isAuthenticated() ? authNav() : visitNav()}
+
                 </Toolbar>
             </AppBar>
         </Box>

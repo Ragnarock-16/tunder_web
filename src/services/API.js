@@ -109,7 +109,13 @@ class API {
             headers: {'Content-Type': 'application/json'}
         }).then(response => response.status === 200 ? response.json() : response)
     }
-
+    addSynthese(token,synthese) {
+        return fetch(`${this.API_URL}/Synthese`, {
+            method: 'POST',
+            body: synthese,
+            headers: {'Authorization': `bearer ${token}`, 'Content-Type': 'application/json'},
+        }).then(response => response)
+    }
     getUserCount(){
         return fetch(`${this.API_URL}/Auth/statistique`, {
             method: 'GET',
@@ -148,6 +154,13 @@ class API {
     addDemande(token, demande){
         return fetch(`${this.API_URL}/Tutorat`, {
             method: 'POST',
+            body: JSON.stringify(demande),
+            headers: {'Authorization': `bearer ${token}`, 'Content-Type': 'application/json'}
+        }).then(response => response.status)
+    }
+    updateDemande(token, demande){
+        return fetch(`${this.API_URL}/Tutorat/Status`, {
+            method: 'PUT',
             body: JSON.stringify(demande),
             headers: {'Authorization': `bearer ${token}`, 'Content-Type': 'application/json'}
         }).then(response => response.status)

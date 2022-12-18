@@ -36,12 +36,11 @@ class UserStore{
         return jwt_decode(localStorage.getItem('token')).Name
     }
     getUserRole(){
-        return jwt_decode(localStorage.getItem('token')).Roles
+        return jwt_decode(localStorage.getItem('token')).role
+
     }
     getUserExp(){
-
         return jwt_decode(localStorage.getItem('token')).exp
-
     }
     forgetUtilisateur(){
         localStorage.removeItem('token')
