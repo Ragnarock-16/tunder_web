@@ -67,6 +67,7 @@ class SyntheseStore{
     }
     uploadSynthese(bloc,cours,file){
         this.isLoading = true
+        console.log(this.isLoading)
         if(file.size===0||!bloc||!cours){
             toasterStore.displayErrorMessage("Veuillez remplir tous les champs")
         }
@@ -77,13 +78,15 @@ class SyntheseStore{
                 api.addSynthese(userStore.getUserToken(),synthese).then(response => {
                     if(response.status!==200){
                         toasterStore.displayErrorMessage("Erreur lors de l'upload de la synthèse")
+                        this.isLoading = false
                     }else{
                         toasterStore.displayConfirmMessage("Synthèse ajoutée avec succès")
+                        this.isLoading = false
                         this.getAllSyntheses()
                     }
                 })
             });
-            this.isLoading = false
+            console.log(this.isLoading)
         }
     }
     getFileNameFormated(fileName){

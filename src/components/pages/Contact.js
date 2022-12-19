@@ -6,23 +6,30 @@ import {ObservedMessageDisplayer} from "../molecule/MessageDisplayer";
 import {api} from "../../services/API";
 import {toasterStore} from "../../stores/ToasterStore";
 import {observer} from "mobx-react";
+import {useState} from "react";
+import {CircularWaiting} from "../molecule/CircularWaiting";
 
 function Contact(){
 
+    const [loading, setLoading] = useState(false);
 
     const handleSubmit = (event) => {
+        setLoading(true);
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         const emailRegex = /^[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)*$/
         if(data.get('Nom') === "" || data.get('Prenom') === "" || data.get('email') === "" || data.get('message') === ''){
             toasterStore.displayErrorMessage("Veuillez entrer entrer des données valide");
+            setLoading(false);
         }else if(!data.get('email').match(emailRegex)){
             toasterStore.displayErrorMessage("Veuillez entrer une adresse email valide");
+            setLoading(false);
         }else{
             api.contact(data.get('email'),data.get('message')).
             then(response => {response === 200 ?
                 toasterStore.displayConfirmMessage("Votre message a bien été envoyé")
-                : toasterStore.displayErrorMessage("Erreur lors de l'envoi du message");console.log(response)})
+                : toasterStore.displayErrorMessage("Erreur lors de l'envoi du message")
+                setLoading(false)})
         }
     }
 
@@ -46,7 +53,8 @@ function Contact(){
                             <InputTextField className={"contactInput"} id={'email'} label={'Email'} value={undefined}/>
                         </div>
                         <InputMessageFiled id={'message'} label={'Message'} value={undefined}/>
-                        <input type={"submit"} className={"input-validation"} value={'Envoyer'}/>
+                        {loading? <CircularWaiting/>:<input type={"submit"} className={"input-validation"} value={'Envoyer'}/>}
+
                     </Box>
                     <ObservedMessageDisplayer message={toasterStore.message} open={toasterStore.open} severity={toasterStore.severity}/>
                 </div>

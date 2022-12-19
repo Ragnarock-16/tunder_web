@@ -5,6 +5,7 @@ import {Autocomplete, CircularProgress, TextField} from "@mui/material";
 import Button from "@mui/material/Button";
 import AttachFileIcon from '@mui/icons-material/AttachFile';
 import {syntheseStore} from "../../stores/SyntheseStore";
+import {CircularWaiting} from "./CircularWaiting";
 
 function AddSyntheseForm({handleSubmit}) {
 
@@ -58,7 +59,7 @@ function AddSyntheseForm({handleSubmit}) {
             <input hidden accept="image/*" name={"syntheseFile"}  type="file" />
         </Button>
 
-        {syntheseStore.isLoading?<CircularProgress/>: <input
+        {syntheseStore.isLoading?<CircularWaiting/>: <input
             className={'submit'}
             type="submit"
             value={"Valider"}
