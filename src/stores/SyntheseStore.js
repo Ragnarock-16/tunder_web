@@ -11,8 +11,16 @@ import {userStore} from "./UserStore";
 class SyntheseStore{
     _syntheses = []
     _syntheseCount = undefined
+    _isLoading = false
+
     constructor(){
         makeAutoObservable(this)
+    }
+    set isLoading(value) {
+        this._isLoading = value;
+    }
+    get isLoading(){
+        return this._isLoading
     }
     set syntheseCount(value) {
         this._syntheseCount = value;
@@ -58,6 +66,7 @@ class SyntheseStore{
         return formattedData
     }
     uploadSynthese(bloc,cours,file){
+        this.isLoading = true
         if(file.size===0||!bloc||!cours){
             toasterStore.displayErrorMessage("Veuillez remplir tous les champs")
         }
@@ -74,6 +83,7 @@ class SyntheseStore{
                     }
                 })
             });
+            this.isLoading = false
         }
     }
     getFileNameFormated(fileName){

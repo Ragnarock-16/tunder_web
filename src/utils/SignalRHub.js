@@ -17,6 +17,7 @@ class SignalRHub{
     subscribeToEvents(){
         this._hubConnection.on("ReceiveSynthese", (nbr) => {
             syntheseStore.syntheseCount = nbr
+            syntheseStore.getAllSyntheses()
         })
 
         this._hubConnection.on("ReceiveUsr", (nbr) => {

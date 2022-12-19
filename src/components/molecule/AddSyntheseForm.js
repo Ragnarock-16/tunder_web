@@ -1,9 +1,10 @@
 import {observer} from "mobx-react";
 import {useEffect, useState} from "react";
 import {demandeStore} from "../../stores/DemandeStore";
-import {Autocomplete, TextField} from "@mui/material";
+import {Autocomplete, CircularProgress, TextField} from "@mui/material";
 import Button from "@mui/material/Button";
 import AttachFileIcon from '@mui/icons-material/AttachFile';
+import {syntheseStore} from "../../stores/SyntheseStore";
 
 function AddSyntheseForm({handleSubmit}) {
 
@@ -56,12 +57,18 @@ function AddSyntheseForm({handleSubmit}) {
             Ajouter un fichier
             <input hidden accept="image/*" name={"syntheseFile"}  type="file" />
         </Button>
-        <input
+
+        {syntheseStore.isLoading?<CircularProgress/>: <input
             className={'submit'}
             type="submit"
             value={"Valider"}
-        >
-        </input>
+        />}
+
+
+
+
+
+
     </form>)
 }
 export const ObserverAddSyntheseForm = observer(AddSyntheseForm);
