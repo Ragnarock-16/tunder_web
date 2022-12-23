@@ -5,6 +5,7 @@ import {demandeStore} from "../../stores/DemandeStore";
 import InputMessageField from "./InputMessageField";
 import DateTimePicker from "./DateTimeField";
 import moment from "moment";
+import {CircularWaiting} from "./CircularWaiting";
 
 function AddDemandeForm({handleSubmit}) {
 
@@ -92,12 +93,13 @@ function AddDemandeForm({handleSubmit}) {
                 <InputMessageField label={"Commentaire"}/>
             </div>
         </div>
+        {demandeStore.isLoading?<CircularWaiting/>:
         <input
             className={'submit'}
             type="submit"
             value={"Demander"}
         >
-        </input>
+        </input>}
     </form>)
 }
 export const ObserverAddDemandeForm = observer(AddDemandeForm);

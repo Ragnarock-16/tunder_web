@@ -1,6 +1,9 @@
 import InputTextField from "../molecule/InputTextField";
+import {observer} from "mobx-react";
+import {CircularWaiting} from "../molecule/CircularWaiting";
+import {authentificationStore} from "../../stores/AuthentificationStore";
 
-export default function SignUpForm({handleSubmit}) {
+function SignUpForm({handleSubmit}) {
 
     return <form onSubmit={handleSubmit}>
         <h1>Inscription</h1>
@@ -11,11 +14,12 @@ export default function SignUpForm({handleSubmit}) {
         <InputTextField type={"email"} id={"Confirme email"} label={"Confirme email"}/>
         <InputTextField type={"password"} id={"password"} label={"Mot de passe"}/>
         <InputTextField type={"password"} id={"confirm password"} label={"Confirme Mot de passe"}/>
-        <input
+        {authentificationStore.isLoading?<CircularWaiting/>:<input
             className={'submit'}
             type="submit"
             value={"Inscription"}
         >
-        </input>
+        </input>}
     </form>
 }
+export const ObserverSignUpForm = observer(SignUpForm);

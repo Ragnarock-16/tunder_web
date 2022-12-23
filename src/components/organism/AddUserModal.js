@@ -4,7 +4,7 @@ import {observer} from "mobx-react";
 import {adminStore} from "../../stores/AdminStore";
 import {useState} from "react";
 import {Dialog, DialogContent} from "@mui/material";
-import SignUpForm from "./SignUpForm";
+import {ObserverSignUpForm} from "./SignUpForm";
 
 function AddUserModal(){
     const [open, setOpen] = useState(false);
@@ -29,7 +29,7 @@ function AddUserModal(){
 
             <Dialog open={open} onClose={handleClose}>
                 <DialogContent>
-                    <SignUpForm handleSubmit={addUser}/>
+                    <ObserverSignUpForm handleSubmit={addUser}/>
                 </DialogContent>
             </Dialog>
         </div>

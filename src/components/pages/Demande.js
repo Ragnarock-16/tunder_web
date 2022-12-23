@@ -46,7 +46,7 @@ function Demande(){
                     size="small"
                     style={{ marginLeft: 16 }}
                     onClick={() => {
-                        demandeStore.updateDemande(params.row,"refused");
+                        demandeStore.updateDemande(params.row,"rejected");
                     }}
                 >
                     Refuser

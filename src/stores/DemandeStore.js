@@ -3,11 +3,18 @@ import {api} from "../services/API";
 import {toasterStore} from "./ToasterStore";
 
 class DemandeStore{
+    _isLoading = false;
     _demandes = []
     _cours = []
     _tutors = []
     constructor() {
         makeAutoObservable(this);
+    }
+    set isLoading(value) {
+        this._isLoading = value;
+    }
+    get isLoading(){
+        return this._isLoading;
     }
     set demandes(value) {
         this._demandes = value;
@@ -33,9 +40,13 @@ class DemandeStore{
            if(response.status){
                console.log("Erreur lors de la récupération des demandes")
            }else{
-               this.demandes = this.tableFormat(response)
+               let sortedData = this.sortDemandesByDate(response)
+               this.demandes = this.tableFormat(sortedData)
            }
        })
+    }
+    sortDemandesByDate(data){
+        return data.sort((a,b) => Date.parse(b.rencontre.date)-Date.parse(a.rencontre.date))
     }
     getCours(){
         api.getCours().then(response => {
@@ -99,6 +110,7 @@ class DemandeStore{
         return formattedData
     }
     addDemande(demande){
+        this.isLoading = true
         let data = {
             id: 0,
             commentaire: demande.get("message"),
@@ -119,9 +131,9 @@ class DemandeStore{
                 this.getDemandes()
                 toasterStore.displayConfirmMessage("Demande créée avec succès")
             }else{
-                console.log(response)
                 toasterStore.displayErrorMessage("Erreur lors de la création de la demande")
             }
+            this.isLoading = false
         })
     }
     beTutor(demande){

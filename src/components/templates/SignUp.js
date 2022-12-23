@@ -1,4 +1,4 @@
-import SignUpForm from "../organism/SignUpForm";
+import {ObserverSignUpForm} from "../organism/SignUpForm";
 import {observer} from "mobx-react";
 import {authentificationStore} from "../../stores/AuthentificationStore";
 
@@ -11,7 +11,7 @@ function SignUp(){
     }
 
     return <div className={"loginForm"}>
-        <SignUpForm handleSubmit={submit}/>
+        <ObserverSignUpForm handleSubmit={submit}/>
     </div>
 }
 export const ObserverSignUp = observer(SignUp);

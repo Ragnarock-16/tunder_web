@@ -67,7 +67,6 @@ class SyntheseStore{
     }
     uploadSynthese(bloc,cours,file){
         this.isLoading = true
-        console.log(this.isLoading)
         if(file.size===0||!bloc||!cours){
             toasterStore.displayErrorMessage("Veuillez remplir tous les champs")
         }

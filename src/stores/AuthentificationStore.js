@@ -6,11 +6,18 @@ import {userStore} from "./UserStore";
 
 class AuthentificationStore{
 
+    _isLoading = false;
     _isLogIn = false
     _SignUpMode = false
 
     constructor() {
         makeAutoObservable(this);
+    }
+    get isLoading(){
+        return this._isLoading
+    }
+    set isLoading(value){
+        this._isLoading = value
     }
     get signUpMode(){
         return this._SignUpMode
@@ -133,6 +140,7 @@ class AuthentificationStore{
             return
         }
         const user = {'nom':lastname,'prenom':firstname,'email':email,'username':username,'password':password}
+        this.isLoading= true
         api.signUp(user).then(data => {
             if(data === 200){
                 toasterStore.displayConfirmMessage("Compte créé avec succès")
@@ -140,6 +148,7 @@ class AuthentificationStore{
             }else{
                 toasterStore.displayErrorMessage("Erreur:"+ data[0].description)
             }
+            this.isLoading= true
         })
     }
 }
